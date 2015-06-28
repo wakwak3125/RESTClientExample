@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RESTClientExample</string>
+
+    <string name="hello_world">This is REST Client Example.</string>
+    <string name="sample_text">以下に取得したレスポンスが表示されます</string>
+    <string name="weather">天気がここに！！！</string>
+    <string name="action_settings">Settings</string>
+</resources>

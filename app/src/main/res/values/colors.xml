@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Theme & Accent -->
+    <color name="teal300">#4DB6AC</color>
+    <color name="teal500">#009688</color>
+    <color name="teal900">#004D40</color>
+
+    <!-- Others -->
+    <color name="orange_accent">#F57C00</color>
+
+    <!-- よく使うやつ -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+</resources>
