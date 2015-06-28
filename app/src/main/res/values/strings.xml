@@ -5,4 +5,7 @@
     <string name="sample_text">以下に取得したレスポンスが表示されます</string>
     <string name="weather">天気がここに！！！</string>
     <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.wakwak.restclientexample;
 
 import android.content.res.Resources;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +13,7 @@ import android.widget.TextView;
 
 import com.wakwak.restclientexample.Api.API_Connect.WeatherConnect;
 import com.wakwak.restclientexample.Event.WeatherEvent;
+import com.wakwak.restclientexample.Fragment.ShowWeatherFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,8 +22,6 @@ import de.greenrobot.event.Subscribe;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.responseField)
-    TextView responseField;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
@@ -36,21 +38,22 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(resources.getColor(R.color.white));
 
-        // お天気取得APIの発動
-        WeatherConnect connect = new WeatherConnect();
-        connect.connenct();
+        // Fragmentの表示
+        Fragment showWethFragment = new ShowWeatherFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.container, showWethFragment);
+        transaction.commit();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        EventBus.getDefault().register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -71,13 +74,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
-    }
-    @Subscribe
-    public void onEvent(WeatherEvent weatherEvent) {
-        if (weatherEvent.isSuccess()) {
-            responseField.setText(weatherEvent.getWeather());
-        }
     }
 }
