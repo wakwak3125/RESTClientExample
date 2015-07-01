@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.wakwak.restclientexample.Api.API_Connect.ATND_Connect;
 import com.wakwak.restclientexample.Api.API_Connect.WeatherConnect;
+import com.wakwak.restclientexample.Event.ATNDEvent;
 import com.wakwak.restclientexample.Event.WeatherEvent;
 import com.wakwak.restclientexample.R;
 
@@ -24,12 +26,12 @@ import de.greenrobot.event.Subscribe;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShowWeatherFragment extends Fragment {
+public class ShowResultFragment extends Fragment {
 
     @Bind(R.id.responseField)
     TextView responseField;
 
-    public ShowWeatherFragment() {
+    public ShowResultFragment() {
         // Required empty public constructor
     }
 
@@ -45,9 +47,14 @@ public class ShowWeatherFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         // お天気取得APIの発動
         WeatherConnect connect = new WeatherConnect();
         connect.connenct();
+
+        // ATND APIの発動
+        ATND_Connect atndConnect = new ATND_Connect();
+        atndConnect.connenct();
     }
 
     @Override
@@ -63,7 +70,6 @@ public class ShowWeatherFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -72,8 +78,17 @@ public class ShowWeatherFragment extends Fragment {
 
     @Subscribe
     public void onEvent(WeatherEvent weatherEvent) {
+        // レスポンスが帰ってきたらそれをTextViewに反映させる。
         if (weatherEvent.isSuccess()) {
             responseField.setText(weatherEvent.getWeather());
         }
     }
+
+    /*@Subscribe
+    public void onEvent(ATNDEvent atndEvent) {
+        // レスポンスが帰ってきたらそれをTextViewに反映させる。
+        if (atndEvent.isSuccess()) {
+            responseField.setText(atndEvent.getTitle());
+        }
+    }*/
 }

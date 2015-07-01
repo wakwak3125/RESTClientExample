@@ -9,51 +9,38 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import com.wakwak.restclientexample.Api.API_Connect.WeatherConnect;
-import com.wakwak.restclientexample.Event.WeatherEvent;
-import com.wakwak.restclientexample.Fragment.ShowWeatherFragment;
+import com.wakwak.restclientexample.Fragment.ShowResultFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
-import de.greenrobot.event.Subscribe;
 
 public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    private Resources resources;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // ButterKnife
         ButterKnife.bind(this);
-        resources = getResources();
+
+        // Resourcesを初期化
+        Resources resources = getResources();
 
         // ToolBar
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(resources.getColor(R.color.white));
 
         // Fragmentの表示
-        Fragment showWethFragment = new ShowWeatherFragment();
+        Fragment showWeatherFragment = new ShowResultFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.container, showWethFragment);
+        transaction.replace(R.id.container, showWeatherFragment);
         transaction.commit();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override
